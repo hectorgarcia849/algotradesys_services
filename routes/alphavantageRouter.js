@@ -60,7 +60,14 @@ alphaVantageRouter.get('/alphavantage/dailydata', (req, res) => {
         .then((avResponse) => {
             let timeSeries = "Time Series (Daily)";
             let data = {};
-            data['data'] = Object.keys(avResponse.data[timeSeries]).map(date => standardizeAVDataKeyNames(avResponse.data[timeSeries][date], date, symbol));
+            data['meta'] = {
+                symbol,
+                'time_zone': avResponse.data["Meta Data"]["5. Time Zone"],
+                'latest_refresh':  avResponse.data["Meta Data"]["3. Last Refreshed"]
+            };
+            data['data'] = Object.keys(avResponse.data[timeSeries]).map(
+                date => standardizeAVDataKeyNames(avResponse.data[timeSeries][date], date, symbol)
+            );
 
             if(data['data'].length > 0) {
                 res.status(200).send(data);
@@ -77,7 +84,6 @@ module.exports = { alphaVantageRouter };
 
 function standardizeAVDataKeyNames(o, k, symbol) {
     const newObj = {};
-    newObj['symbol'] = symbol;
     newObj['date'] = k;
     newObj['open'] = o['1. open'];
     newObj['high'] = o['2. high'];
