@@ -12,5 +12,11 @@ mySQLConnector = (query) => {
     });
 };
 
+const  mongodbConnector = require('mongoose');
 
-module.exports = mySQLConnector;
+mongodbConnector.Promise = global.Promise; //need to let mongoose know that you want to use default promises that come with es6
+mongodbConnector.connect(process.env.MONGODB_URI, { useNewUrlParser: true })
+    .then(() => console.log('Connected to Database'))
+    .catch((e) => console.log('db Connection Error', e));
+
+module.exports = { mySQLConnector, mongodbConnector };
