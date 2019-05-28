@@ -6,7 +6,7 @@ const API_KEY = process.env.API_KEY;
 
 
 
-alphaVantageRouter.get('/alphavantage/quote', (req, res) => {
+alphaVantageRouter.get('/quote', (req, res) => {
     // api
         // ticker_name
 
@@ -47,7 +47,7 @@ alphaVantageRouter.get('/alphavantage/quote', (req, res) => {
 
 });
 
-alphaVantageRouter.get('/alphavantage/dailydata', (req, res) => {
+alphaVantageRouter.get('/dailydata', (req, res) => {
 
     // api
         // ticker_name
