@@ -1,7 +1,7 @@
 require('../../config/config');
 const express = require('express');
 const algotradedbRouter = express.Router();
-const mySQLConnector = require('../apis/algoTradeSysDBConnector');
+const { mySQLConnector } = require('../apis/algoTradeSysDBConnectors');
 const API_KEY = process.env.API_KEY;
 
 
